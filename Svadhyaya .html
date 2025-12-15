@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Niyam for Spiritual Progress</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Body and Typography */
+        body {
+            font-family: 'helvetica', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f5f1; /* SAME calm background */
+            color: #1f1f1f;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        h1, h2, h3 {
+            font-family: 'garamond';
+            color: #7a7a7a; /* Muted spiritual heading */
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            border-bottom: 2px solid #e6e1d8;
+            padding-bottom: 5px;
+            margin-top: 2em;
+        }
+
+        p {
+            margin-bottom: 1em;
+        }
+
+        /* Header */
+        header {
+            background-color: #b58b4a; /* SAME accent gold */
+            color: #ffffff;
+            padding: 1em 0;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            width: 100%;
+        }
+
+        header h1 {
+            margin: 0;
+            color: #ffffff;
+        }
+
+        /* Daily Niyam Display */
+        #daily-niyam-card {
+            background-color: #fffdf8; /* SAME card paper */
+            padding: 30px;
+            margin-top: 40px;
+            border-radius: 20px;
+            border: 1px solid #e6e1d8;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+            width: 100%;
+            max-width: 600px;
+            box-sizing: border-box;
+        }
+
+        #niyam-date {
+            font-size: 1.1em;
+            color: #7a7a7a;
+            margin-bottom: 15px;
+            font-weight: 400;
+        }
+
+        #niyam-text {
+            font-size: 1.4em;
+            color: #1f1f1f;
+            font-weight: 500;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        #niyam-category {
+            font-size: 0.9em;
+            color: #7a7a7a;
+            font-style: italic;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #f1efe9;
+            color: #7a7a7a;
+            text-align: center;
+            padding: 1em 0;
+            margin-top: auto;
+            font-size: 0.9em;
+            width: 100%;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px auto;
+                padding: 0 15px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            #daily-niyam-card {
+                padding: 20px;
+                margin-top: 20px;
+            }
+            #niyam-text {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>SVADHYAYA NIYAM</h1>
+    </header>
+
+    <main class="container">
+        <div id="daily-niyam-card">
+            <p id="niyam-date"></p>
+            <p id="niyam-text"></p>
+            <p id="niyam-category"></p>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Jain Niyams App. All rights reserved. Based on Jain Dharma principles.</p>
+    </footer>
+
+    <script>
+        // List of 365 Niyams (from previous response)
+        const niyams = [
+            // Month 1: Foundations of Right Belief (Samyak Darshan) & Tattva Understanding
+            { text: "Reflect on the preciousness of human birth.", category: "Samyak Darshan & Tattva Understanding" },
+            { text: "Study the definition of *Jiva* (soul) from *Tattvartha Sutra*.", category: "Samyak Darshan & Tattva Understanding" },
+            { text: "Contemplate the distinctness of the soul from the body (*Anyatva Bhavana*).", category: "Samyak Darshan & Tattva Understanding" },
+            { text: "Understand *Ajiva* (non-soul) as separate from the self.", category: "Samyak Darshan & Tattva Understanding" },
+            { text: "Read about the nature of *Pudgala* (matter).", category: "Samyak Darshan & Tattva Understanding" },
+            { text: "Reflect on *Dharma Dravya* (medium of motion).", category: "Samyak Darshan & Tattva Understanding" },
+            { text: "Study *Adharma Dravya* (medium of rest).", category: "Samyak Darshan & Tattva Understanding" },
+            { text: "Contemplate *Akasha Dravya* (space).", category: "Samyak Darshan & Tattva Understanding" },
+            { text: "Understand *Kala Dravya* (time).", category: "Samyak Darshan & Tattva Understanding" },
+            { text: "Affirm the eternal nature of the soul.", category: "Samyak Darshan & Tattva Understanding" },
+            { text: "Reflect on the soul's inherent consciousness.", category: "Samyak Darshan & Tattva Understanding" },
+            { text: "Study the definition of *Asrava* (influx of karma).", category: "Samyak Darshan & Tattva Understanding" },
+            { text: "Identify the causes of *Asrava* in daily life.", category: "Samyak Darshan & Tattva Understanding" },
+            { text: "Understand *Bandha* (bondage of karma) and its types.", category: "Samyak Darshan & Tattva Understanding" },
+            { text: "Reflect on how attachment leads to *Bandha*.", category: "Samyak Darshan & Tattva Understanding" },
+            { text: "Study *Samvara* (stoppage of karma).", category: "Samyak Darshan & Tattva Understanding" },
+            { text: "Identify ways to stop new karma influx.", category: "Samyak Darshan & Tattva Understanding" },
+            { text: "Understand *Nirjara* (shedding of karma).", category: "Samyak Darshan & Tattva Understanding" },
+            { text: "Reflect on the process of *Nirjara* through *Tapas*.", category: "Samyak Darshan & Tattva Understanding" },
+            { text: "Study the ultimate state of *Moksha* (liberation).", category: "Samyak Darshan & Tattva Understanding" },
+            { text: "Contemplate the qualities of a *Siddha* (liberated soul).", category: "Samyak Darshan & Tattva Understanding" },
+            { text: "Reflect on the rarity of *Samyak Darshan* (*Bodhidurlabha Bhavana*).", category: "Samyak Darshan & Tattva Understanding" },
+            { text: "Understand *Mithyatva* (wrong belief) as the root of suffering.", category: "Samyak Darshan & Tattva Understanding" },
+            { text: "Identify one form of *Mithyatva* to overcome today.", category: "Samyak Darshan & Tattva Understanding" },
+            { text: "Read a verse on the importance of *Samyak Darshan*.", category: "Samyak Darshan & Tattva Understanding" },
+            { text: "Reflect on the teachings of the *Arihant*.", category: "Samyak Darshan & Tattva Understanding" },
+            { text: "Study the virtues of the *Siddhas*.", category: "Samyak Darshan & Tattva Understanding" },
+            { text: "Contemplate the role of *Acharyas* as spiritual guides.", category: "Samyak Darshan & Tattva Understanding" },
+            { text: "Understand the teachings of *Upadhyayas*.", category: "Samyak Darshan & Tattva Understanding" },
+            { text: "Reflect on the conduct of *Sadhus* and *Sadhvis*.", category: "Samyak Darshan & Tattva Understanding" },
+            { text: "Revere the *Pancha Parameshti* in thought.", category: "Samyak Darshan & Tattva Understanding" },
+// Month 2: Deepening Knowledge & Anekantavada
+            { text: "Study the definition of *Pramana* (valid knowledge).", category: "Deepening Knowledge & Anekantavada" },
+            { text: "Understand *Naya* (viewpoint) as a partial truth.", category: "Deepening Knowledge & Anekantavada" },
+            { text: "Reflect on *Anekantavada* (non-absolutism) in a daily situation.", category: "Deepening Knowledge & Anekantavada" },
+            { text: "Practice *Syadvada* (conditional predication) in expressing a truth.", category: "Deepening Knowledge & Anekantavada" },
+            { text: "Read about the five types of *Jnana* (knowledge).", category: "Deepening Knowledge & Anekantavada" },
+            { text: "Contemplate *Mati Jnana* (sensory knowledge) and its limits.", category: "Deepening Knowledge & Anekantavada" },
+            { text: "Study *Shruta Jnana* (scriptural knowledge) and its importance.", category: "Deepening Knowledge & Anekantavada" },
+            { text: "Reflect on *Avadhi Jnana* (clairvoyance) as a soul's power.", category: "Deepening Knowledge & Anekantavada" },
+            { text: "Understand *Manahparyaya Jnana* (telepathy).", category: "Deepening Knowledge & Anekantavada" },
+            { text: "Contemplate *Kevala Jnana* (omniscience) as the soul's perfection.", category: "Deepening Knowledge & Anekantavada" },
+            { text: "Read about *Jnanavaraniya Karma* (knowledge-obscuring karma).", category: "Deepening Knowledge & Anekantavada" },
+            { text: "Identify one action that obscures knowledge (e.g., intellectual arrogance).", category: "Deepening Knowledge & Anekantavada" },
+            { text: "Resolve to clarify one spiritual doubt today.", category: "Deepening Knowledge & Anekantavada" },
+            { text: "Study a passage on the importance of *Svadhyaya*.", category: "Deepening Knowledge & Anekantavada" },
+            { text: "Reflect on the benefits of consistent learning.", category: "Deepening Knowledge & Anekantavada" },
+            { text: "Understand the difference between *nischaya* (real) and *vyavahara* (practical) naya.", category: "Deepening Knowledge & Anekantavada" },
+            { text: "Apply *nischaya naya* to view the soul as pure.", category: "Deepening Knowledge & Anekantavada" },
+            { text: "Apply *vyavahara naya* to understand daily conduct.", category: "Deepening Knowledge & Anekantavada" },
+            { text: "Read about the nature of *Dravya* (substance).", category: "Deepening Knowledge & Anekantavada" },
+            { text: "Contemplate *Paryaya* (modes/modifications) of substances.", category: "Deepening Knowledge & Anekantavada" },
+            { text: "Reflect on the permanence and change in every substance.", category: "Deepening Knowledge & Anekantavada" },
+            { text: "Study the six universal substances (*Dravyas*).", category: "Deepening Knowledge & Anekantavada" },
+            { text: "Understand the concept of *Guna* (qualities) of substances.", category: "Deepening Knowledge & Anekantavada" },
+            { text: "Reflect on the soul's infinite qualities.", category: "Deepening Knowledge & Anekantavada" },
+            { text: "Read about the characteristics of *Loka* (universe) (*Loka Bhavana*).", category: "Deepening Knowledge & Anekantavada" },
+            { text: "Contemplate the vastness and self-sufficiency of the cosmos.", category: "Deepening Knowledge & Anekantavada" },
+            { text: "Study the nature of *Dharma* (true religion) (*Dharma Bhavana*).", category: "Deepening Knowledge & Anekantavada" },
+            { text: "Reflect on the universal principles of Jain Dharma.", category: "Deepening Knowledge & Anekantavada" },
+            { text: "Understand the importance of *Agamas* (scriptures).", category: "Deepening Knowledge & Anekantavada" },
+            { text: "Read a commentary on a key Jain text.", category: "Deepening Knowledge & Anekantavada" },
+
+            // Month 3: Countering Krodha (Anger) with Kshama (Forgiveness)
+            { text: "Reflect on *Krodha* (anger) as a destructive *kashaya*.", category: "Countering Krodha with Kshama" },
+            { text: "Study the karmic consequences of anger.", category: "Countering Krodha with Kshama" },
+            { text: "Contemplate *Kshama* (forgiveness) as the antidote to anger.", category: "Countering Krodha with Kshama" },
+            { text: "Read a story illustrating the power of forgiveness.", category: "Countering Krodha with Kshama" },
+            { text: "Reflect on a past instance of anger and its futility.", category: "Countering Krodha with Kshama" },
+            { text: "Resolve to pause before reacting angrily today.", category: "Countering Krodha with Kshama" },
+            { text: "Study the benefits of patience (*Dhairyata*).", category: "Countering Krodha with Kshama" },
+            { text: "Practice mental forgiveness towards someone who wronged you.", category: "Countering Krodha with Kshama" },
+            { text: "Understand that anger harms oneself first.", category: "Countering Krodha with Kshama" },
+            { text: "Reflect on the impermanence of all external provocations.", category: "Countering Krodha with Kshama" },
+            { text: "Read about the virtue of non-retaliation.", category: "Countering Krodha with Kshama" },
+            { text: "Contemplate the soul's inherent peace, undisturbed by anger.", category: "Countering Krodha with Kshama" },
+            { text: "Study how *Ahimsa* (non-violence) extends to thoughts of anger.", category: "Countering Krodha with Kshama" },
+            { text: "Reflect on the interconnectedness of all living beings.", category: "Countering Krodha with Kshama" },
+            { text: "Understand that others' actions are driven by their karma.", category: "Countering Krodha with Kshama" },
+            { text: "Practice empathy for those who cause anger.", category: "Countering Krodha with Kshama" },
+            { text: "Read a passage on cultivating a calm demeanor.", category: "Countering Krodha with Kshama" },
+            { text: "Reflect on the peace that comes from letting go of grudges.", category: "Countering Krodha with Kshama" },
+            { text: "Study the importance of speaking softly and kindly.", category: "Countering Krodha with Kshama" },
+            { text: "Avoid harsh words and criticism today.", category: "Countering Krodha with Kshama" },
+            { text: "Contemplate the virtue of forbearance (*Sahishnuta*).", category: "Countering Krodha with Kshama" },
+            { text: "Reflect on the transient nature of all conflicts.", category: "Countering Krodha with Kshama" },
+            { text: "Study how to respond with kindness, not fury.", category: "Countering Krodha with Kshama" },
+            { text: "Understand anger as a weakness, not strength.", category: "Countering Krodha with Kshama" },
+            { text: "Read about the importance of self-restraint.", category: "Countering Krodha with Kshama" },
+            { text: "Practice mindful awareness of rising emotions.", category: "Countering Krodha with Kshama" },
+            { text: "Reflect on the teachings of *Maitri* (universal friendship).", category: "Countering Krodha with Kshama" },
+            { text: "Study how to avoid aggressive thoughts.", category: "Countering Krodha with Kshama" },
+            { text: "Resolve to cultivate a forgiving heart daily.", category: "Countering Krodha with Kshama" },
+            { text: "Reflect on the purity of a mind free from anger.", category: "Countering Krodha with Kshama" },
+// Month 4: Countering Mana (Pride) with Mardava (Humility)
+            { text: "Reflect on *Mana* (pride) as an obstructive *kashaya*.", category: "Countering Mana with Mardava" },
+            { text: "Study the karmic consequences of pride.", category: "Countering Mana with Mardava" },
+            { text: "Contemplate *Mardava* (humility) as the antidote to pride.", category: "Countering Mana with Mardava" },
+            { text: "Read a story illustrating the virtue of humility.", category: "Countering Mana with Mardava" },
+            { text: "Reflect on the impermanence of all achievements and possessions.", category: "Countering Mana with Mardava" },
+            { text: "Understand that all abilities are due to karma.", category: "Countering Mana with Mardava" },
+            { text: "Practice humility in speech and action today.", category: "Countering Mana with Mardava" },
+            { text: "Avoid boasting or self-praise.", category: "Countering Mana with Mardava" },
+            { text: "Study the benefits of serving others without expectation.", category: "Countering Mana with Mardava" },
+            { text: "Reflect on the vastness of the universe and one's smallness.", category: "Countering Mana with Mardava" },
+            { text: "Contemplate the soul's inherent purity, free from ego.", category: "Countering Mana with Mardava" },
+            { text: "Read about the importance of respecting all beings.", category: "Countering Mana with Mardava" },
+            { text: "Avoid comparing oneself to others.", category: "Countering Mana with Mardava" },
+            { text: "Understand that true greatness lies in humility.", category: "Countering Mana with Mardava" },
+            { text: "Reflect on the karmic burden of pride.", category: "Countering Mana with Mardava" },
+            { text: "Study the virtue of accepting constructive criticism.", category: "Countering Mana with Mardava" },
+            { text: "Practice simplicity in lifestyle.", category: "Countering Mana with Mardava" },
+            { text: "Avoid flaunting wealth or status.", category: "Countering Mana with Mardava" },
+            { text: "Contemplate the equality of all souls in potential.", category: "Countering Mana with Mardava" },
+            { text: "Read about the importance of seeking guidance from elders.", category: "Countering Mana with Mardava" },
+            { text: "Reflect on the transient nature of the body and its attributes.", category: "Countering Mana with Mardava" },
+            { text: "Understand that true strength is inner, not outer.", category: "Countering Mana with Mardava" },
+            { text: "Practice self-effacement today.", category: "Countering Mana with Mardava" },
+            { text: "Avoid seeking attention or validation.", category: "Countering Mana with Mardava" },
+            { text: "Study the teachings of *Samata* (equanimity).", category: "Countering Mana with Mardava" },
+            { text: "Reflect on the impermanence of power and position.", category: "Countering Mana with Mardava" },
+            { text: "Cultivate a spirit of learning from everyone.", category: "Countering Mana with Mardava" },
+            { text: "Acknowledge one's own limitations.", category: "Countering Mana with Mardava" },
+            { text: "Read about avoiding intellectual pride.", category: "Countering Mana with Mardava" },
+            { text: "Share knowledge humbly.", category: "Countering Mana with Mardava" },
+            { text: "Practice being a student always.", category: "Countering Mana with Mardava" },
+            { text: "Understand that pride obstructs spiritual progress.", category: "Countering Mana with Mardava" },
+
+            // Month 5: Countering Maya (Deceit) with Arjava (Straightforwardness)
+            { text: "Reflect on *Maya* (deceit) as a crooked *kashaya*.", category: "Countering Maya with Arjava" },
+            { text: "Study the karmic consequences of deceit.", category: "Countering Maya with Arjava" },
+            { text: "Contemplate *Arjava* (straightforwardness) as the antidote to deceit.", category: "Countering Maya with Arjava" },
+            { text: "Read a story illustrating the virtue of honesty.", category: "Countering Maya with Arjava" },
+            { text: "Reflect on the importance of speaking truthfully and directly.", category: "Countering Maya with Arjava" },
+            { text: "Avoid manipulation or cunning in interactions today.", category: "Countering Maya with Arjava" },
+            { text: "Practice honesty in all dealings.", category: "Countering Maya with Arjava" },
+            { text: "Understand that truthfulness builds trust.", category: "Countering Maya with Arjava" },
+            { text: "Reflect on the purity of a straightforward mind.", category: "Countering Maya with Arjava" },
+            { text: "Study the teachings of *Satya* (truthfulness).", category: "Countering Maya with Arjava" },
+            { text: "Speak only what is beneficial, true, and moderate.", category: "Countering Maya with Arjava" },
+            { text: "Avoid exaggeration or embellishment.", category: "Countering Maya with Arjava" },
+            { text: "Practice simplicity in communication.", category: "Countering Maya with Arjava" },
+            { text: "Understand that deceit creates inner turmoil.", category: "Countering Maya with Arjava" },
+            { text: "Cultivate a clear conscience.", category: "Countering Maya with Arjava" },
+            { text: "Reflect on the karmic burden of hypocrisy.", category: "Countering Maya with Arjava" },
+            { text: "Avoid hiding one's true feelings (unless harmful).", category: "Countering Maya with Arjava" },
+            { text: "Be authentic in expression.", category: "Countering Maya with Arjava" },
+            { text: "Study the importance of consistency between words and actions.", category: "Countering Maya with Arjava" },
+            { text: "Avoid making false promises.", category: "Countering Maya with Arjava" },
+            { text: "Keep commitments and vows.", category: "Countering Maya with Arjava" },
+            { text: "Reflect on the purity of inner intentions.", category: "Countering Maya with Arjava" },
+            { text: "Understand that deceit obstructs spiritual clarity.", category: "Countering Maya with Arjava" },
+            { text: "Practice integrity even when inconvenient.", category: "Countering Maya with Arjava" },
+            { text: "Avoid misleading others for personal gain.", category: "Countering Maya with Arjava" },
+            { text: "Read about the virtue of being genuine in actions.", category: "Countering Maya with Arjava" },
+            { text: "Cultivate a mind free from crookedness.", category: "Countering Maya with Arjava" },
+            { text: "Avoid engaging in fraudulent activities.", category: "Countering Maya with Arjava" },
+            { text: "Be honest in financial matters.", category: "Countering Maya with Arjava" },
+            { text: "Practice fairness in all transactions.", category: "Countering Maya with Arjava" },
+            { text: "Reflect on the teachings of *Asteya* (non-stealing).", category: "Countering Maya with Arjava" },
+   // Month 6: Countering Lobha (Greed) with Shaucha (Purity/Contentment)
+            { text: "Reflect on *Lobha* (greed) as an insatiable *kashaya*.", category: "Countering Lobha with Shaucha" },
+            { text: "Study the karmic consequences of greed.", category: "Countering Lobha with Shaucha" },
+            { text: "Contemplate *Shaucha* (purity/contentment) as the antidote to greed.", category: "Countering Lobha with Shaucha" },
+            { text: "Read a story illustrating the virtue of contentment.", category: "Countering Lobha with Shaucha" },
+            { text: "Reflect on the impermanence of all material wealth.", category: "Countering Lobha with Shaucha" },
+            { text: "Practice *Aparigraha* (non-possessiveness) by limiting desires.", category: "Countering Lobha with Shaucha" },
+            { text: "Avoid craving for more possessions today.", category: "Countering Lobha with Shaucha" },
+            { text: "Give away surplus possessions to the needy.", category: "Countering Lobha with Shaucha" },
+            { text: "Understand that greed leads to endless dissatisfaction.", category: "Countering Lobha with Shaucha" },
+            { text: "Cultivate a sense of detachment from possessions.", category: "Countering Lobha with Shaucha" },
+            { text: "Practice mindful consumption.", category: "Countering Lobha with Shaucha" },
+            { text: "Avoid wasting resources.", category: "Countering Lobha with Shaucha" },
+            { text: "Reflect on the karmic burden of excessive attachment.", category: "Countering Lobha with Shaucha" },
+            { text: "Be satisfied with simple living.", category: "Countering Lobha with Shaucha" },
+            { text: "Avoid comparing one's wealth with others.", category: "Countering Lobha with Shaucha" },
+            { text: "Understand that true wealth is spiritual.", category: "Countering Lobha with Shaucha" },
+            { text: "Practice generosity and charity (*Dana*).", category: "Countering Lobha with Shaucha" },
+            { text: "Avoid exploiting others for personal gain.", category: "Countering Lobha with Shaucha" },
+            { text: "Reflect on the purity of a desire-free mind.", category: "Countering Lobha with Shaucha" },
+            { text: "Limit desires for sensory pleasures.", category: "Countering Lobha with Shaucha" },
+            { text: "Practice self-control in eating and drinking.", category: "Countering Lobha with Shaucha" },
+            { text: "Avoid overindulgence.", category: "Countering Lobha with Shaucha" },
+            { text: "Understand that greed fuels the cycle of rebirth.", category: "Countering Lobha with Shaucha" },
+            { text: "Cultivate inner richness over external riches.", category: "Countering Lobha with Shaucha" },
+            { text: "Avoid attachment to money and property.", category: "Countering Lobha with Shaucha" },
+            { text: "Use resources responsibly and ethically.", category: "Countering Lobha with Shaucha" },
+            { text: "Practice non-attachment to the fruits of labor.", category: "Countering Lobha with Shaucha" },
+            { text: "Understand that true happiness is internal.", category: "Countering Lobha with Shaucha" },
+            { text: "Reflect on the teachings of *Brahmacharya* (chastity).", category: "Countering Lobha with Shaucha" },
+
+            // Month 7: Controlling No-Kashayas (Minor Passions) & Indriya Nigraha (Sense Control)
+            { text: "Study the nature of *Hasya* (laughter) as a *no-kashaya*.", category: "Controlling No-Kashayas & Sense Control" },
+            { text: "Observe laughter without excessive indulgence.", category: "Controlling No-Kashayas & Sense Control" },
+            { text: "Cultivate seriousness in spiritual matters.", category: "Controlling No-Kashayas & Sense Control" },
+            { text: "Avoid frivolous talk and gossip.", category: "Controlling No-Kashayas & Sense Control" },
+            { text: "Study the nature of *Arati* (sorrow/dislike) as a *no-kashaya*.", category: "Controlling No-Kashayas & Sense Control" },
+            { text: "Observe sorrow without dwelling in it.", category: "Controlling No-Kashayas & Sense Control" },
+            { text: "Cultivate equanimity towards pleasant and unpleasant feelings.", category: "Controlling No-Kashayas & Sense Control" },
+            { text: "Practice detachment from emotional highs and lows.", category: "Controlling No-Kashayas & Sense Control" },
+            { text: "Study the nature of *Bhaya* (fear) as a *no-kashaya*.", category: "Controlling No-Kashayas & Sense Control" },
+            { text: "Observe fear without succumbing to it.", category: "Controlling No-Kashayas & Sense Control" },
+            { text: "Cultivate fearlessness through right belief.", category: "Controlling No-Kashayas & Sense Control" },
+            { text: "Practice courage in upholding dharma.", category: "Controlling No-Kashayas & Sense Control" },
+            { text: "Study the nature of *Jugupsa* (disgust) as a *no-kashaya*.", category: "Controlling No-Kashayas & Sense Control" },
+            { text: "Observe disgust without aversion.", category: "Controlling No-Kashayas & Sense Control" },
+            { text: "Cultivate purity and acceptance of all beings.", category: "Controlling No-Kashayas & Sense Control" },
+            { text: "Practice cleanliness in body and environment.", category: "Controlling No-Kashayas & Sense Control" },
+            { text: "Study the nature of *Veda* (sexual desires) as a *no-kashaya*.", category: "Controlling No-Kashayas & Sense Control" },
+            { text: "Control sexual desires through *Brahmacharya*.", category: "Controlling No-Kashayas & Sense Control" },
+            { text: "Practice purity in thought, word, and deed.", category: "Controlling No-Kashayas & Sense Control" },
+            { text: "Reflect on the soul's genderless and pure nature.", category: "Controlling No-Kashayas & Sense Control" },
+            { text: "Study the importance of *Indriya Nigraha* (sense control).", category: "Controlling No-Kashayas & Sense Control" },
+            { text: "Restrain the eyes from lustful or harmful sights.", category: "Controlling No-Kashayas & Sense Control" },
+            { text: "Control the ears from unwholesome sounds.", category: "Controlling No-Kashayas & Sense Control" },
+            { text: "Restrain the nose from excessive attachment to smells.", category: "Controlling No-Kashayas & Sense Control" },
+            { text: "Control the tongue from excessive attachment to tastes.", category: "Controlling No-Kashayas & Sense Control" },
+            { text: "Restrain the skin from excessive attachment to touch.", category: "Controlling No-Kashayas & Sense Control" },
+            { text: "Practice mindful eating, avoiding overindulgence.", category: "Controlling No-Kashayas & Sense Control" },
+            { text: "Limit exposure to sensory stimuli that incite passions.", category: "Controlling No-Kashayas & Sense Control" },
+            { text: "Cultivate inner stillness, independent of senses.", category: "Controlling No-Kashayas & Sense Control" },
+            { text: "Practice *Pratisamlinata* (withdrawal of senses).", category: "Controlling No-Kashayas & Sense Control" },
+            { text: "Reflect on the senses as instruments, not masters.", category: "Controlling No-Kashayas & Sense Control" },
+            { text: "Study the karmic effects of uncontrolled senses.", category: "Controlling No-Kashayas & Sense Control" },
+            { text: "Understand how sense control aids meditation.", category: "Controlling No-Kashayas & Sense Control" },
+            { text: "Read about the benefits of a disciplined lifestyle.", category: "Controlling No-Kashayas & Sense Control" },
+            { text: "Reflect on the purity gained through sense restraint.", category: "Controlling No-Kashayas & Sense Control" },
+            { text: "Study the role of *manas* (mind) in sense control.", category: "Controlling No-Kashayas & Sense Control" },
+            { text: "Practice observing thoughts without attachment.", category: "Controlling No-Kashayas & Sense Control" },
+            { text: "Cultivate mental discipline through *svadhyaya*.", category: "Controlling No-Kashayas & Sense Control" },
+
+            // Month 8: The 12 Bhavanas (Reflections) - Deep Dive
+            { text: "Deeply reflect on *Anitya Bhavana* (impermanence of all things).", category: "The 12 Bhavanas - Deep Dive" },
+            { text: "Contemplate *Asharana Bhavana* (helplessness without dharma).", category: "The 12 Bhavanas - Deep Dive" },
+            { text: "Meditate on *Samsara Bhavana* (the cycle of birth and death).", category: "The 12 Bhavanas - Deep Dive" },
+            { text: "Reflect on *Ekatva Bhavana* (solitariness of the soul).", category: "The 12 Bhavanas - Deep Dive" },
+            { text: "Contemplate *Anyatva Bhavana* (distinctness of soul from non-soul).", category: "The 12 Bhavanas - Deep Dive" },
+            { text: "Reflect on *Ashuchi Bhavana* (impurity of the body).", category: "The 12 Bhavanas - Deep Dive" },
+            { text: "Contemplate *Asrava Bhavana* (influx of karma).", category: "The 12 Bhavanas - Deep Dive" },
+            { text: "Reflect on *Samvara Bhavana* (stoppage of karma).", category: "The 12 Bhavanas - Deep Dive" },
+            { text: "Contemplate *Nirjara Bhavana* (shedding of karma).", category: "The 12 Bhavanas - Deep Dive" },
+            { text: "Reflect on *Loka Bhavana* (the nature of the universe).", category: "The 12 Bhavanas - Deep Dive" },
+            { text: "Contemplate *Bodhidurlabha Bhavana* (rarity of enlightenment).", category: "The 12 Bhavanas - Deep Dive" },
+            { text: "Reflect on *Dharma Bhavana* (the true nature of dharma).", category: "The 12 Bhavanas - Deep Dive" },
+            { text: "Study how each Bhavana weakens *Mohniya Karma*.", category: "The 12 Bhavanas - Deep Dive" },
+            { text: "Choose one Bhavana to focus on for the entire day.", category: "The 12 Bhavanas - Deep Dive" },
+            { text: "Read a detailed commentary on one of the Bhavanas.", category: "The 12 Bhavanas - Deep Dive" },
+            { text: "Reflect on how Bhavanas cultivate *vairagya* (detachment).", category: "The 12 Bhavanas - Deep Dive" },
+            { text: "Understand the practical application of Bhavanas in daily life.", category: "The 12 Bhavanas - Deep Dive" },
+            { text: "Contemplate the interconnectedness of all Bhavanas.", category: "The 12 Bhavanas - Deep Dive" },
+            { text: "Reflect on how Bhavanas strengthen *Samyak Darshan*.", category: "The 12 Bhavanas - Deep Dive" },
+            { text: "Study how Bhavanas reduce *kashayas*.", category: "The 12 Bhavanas - Deep Dive" },
+            { text: "Practice visualizing the essence of a Bhavana.", category: "The 12 Bhavanas - Deep Dive" },
+            { text: "Reflect on the peace that comes from deep contemplation.", category: "The 12 Bhavanas - Deep Dive" },
+            { text: "Understand Bhavanas as a form of internal *Tapas*.", category: "The 12 Bhavanas - Deep Dive" },
+            { text: "Read about the benefits of regular Bhavana practice.", category: "The 12 Bhavanas - Deep Dive" },
+            { text: "Contemplate how Bhavanas lead to self-realization.", category: "The 12 Bhavanas - Deep Dive" },
+            { text: "Reflect on the impermanence of youth and beauty.", category: "The 12 Bhavanas - Deep Dive" },
+            { text: "Understand that no external entity can save the soul.", category: "The 12 Bhavanas - Deep Dive" },
+            { text: "Reflect on the endless suffering in the cycle of rebirth.", category: "The 12 Bhavanas - Deep Dive" },
+            { text: "Contemplate that the soul alone experiences its karma.", category: "The 12 Bhavanas - Deep Dive" },
+            { text: "Reflect on the body as a temporary vessel, distinct from the soul.", category: "The 12 Bhavanas - Deep Dive" },
+            { text: "Understand the body's inherent impurity and decay.", category: "The 12 Bhavanas - Deep Dive" },
+            { text: "Reflect on how desires lead to karmic influx.", category: "The 12 Bhavanas - Deep Dive" },
+            { text: "Contemplate how self-control stops new karma.", category: "The 12 Bhavanas - Deep Dive" },
+            { text: "Reflect on how austerities shed old karma.", category: "The 12 Bhavanas - Deep Dive" },
+            { text: "Understand the universe as a self-regulating entity.", category: "The 12 Bhavanas - Deep Dive" },
+            { text: "Reflect on the precious opportunity of human life.", category: "The 12 Bhavanas - Deep Dive" },
+            { text: "Contemplate the true dharma of the soul.", category: "The 12 Bhavanas - Deep Dive" },
+            { text: "Study the role of Bhavanas in developing *Samata*.", category: "The 12 Bhavanas - Deep Dive" },
+            { text: "Reflect on the power of consistent spiritual reflection.", category: "The 12 Bhavanas - Deep Dive" },
+            { text: "Understand Bhavanas as a path to inner freedom.", category: "The 12 Bhavanas - Deep Dive" },
+// Month 9: Svadhyaya for Karma Theory & Ethical Living
+            { text: "Study the eight types of karma and their functions.", category: "Karma Theory & Ethical Living" },
+            { text: "Understand *Darshanavaraniya Karma* (perception-obscuring).", category: "Karma Theory & Ethical Living" },
+            { text: "Reflect on *Vedaniya Karma* (feeling-producing).", category: "Karma Theory & Ethical Living" },
+            { text: "Study *Mohaniya Karma* (deluding) in detail.", category: "Karma Theory & Ethical Living" },
+            { text: "Understand *Ayushya Karma* (life-span determining).", category: "Karma Theory & Ethical Living" },
+            { text: "Reflect on *Nama Karma* (body-making).", category: "Karma Theory & Ethical Living" },
+            { text: "Study *Gotra Karma* (status-determining).", category: "Karma Theory & Ethical Living" },
+            { text: "Understand *Antaraya Karma* (obstructive).", category: "Karma Theory & Ethical Living" },
+            { text: "Reflect on the causes of *Jnanavaraniya Karma*.", category: "Karma Theory & Ethical Living" },
+            { text: "Study the causes of *Darshanavaraniya Karma*.", category: "Karma Theory & Ethical Living" },
+            { text: "Understand the causes of *Mohaniya Karma*.", category: "Karma Theory & Ethical Living" },
+            { text: "Reflect on the causes of *Vedaniya Karma*.", category: "Karma Theory & Ethical Living" },
+            { text: "Study the causes of *Ayushya Karma*.", category: "Karma Theory & Ethical Living" },
+            { text: "Understand the causes of *Nama Karma*.", category: "Karma Theory & Ethical Living" },
+            { text: "Reflect on the causes of *Gotra Karma*.", category: "Karma Theory & Ethical Living" },
+            { text: "Study the causes of *Antaraya Karma*.", category: "Karma Theory & Ethical Living" },
+            { text: "Read about the four *gatis* (states of existence).", category: "Karma Theory & Ethical Living" },
+            { text: "Contemplate the suffering in *Naraka* (hell).", category: "Karma Theory & Ethical Living" },
+            { text: "Reflect on the transient pleasures of *Svarga* (heaven).", category: "Karma Theory & Ethical Living" },
+            { text: "Understand the limitations of animal life (*Tiryancha*).", category: "Karma Theory & Ethical Living" },
+            { text: "Reflect on the potential of human life (*Manushya*).", category: "Karma Theory & Ethical Living" },
+            { text: "Study the concept of *Leshyas* (soul colorations) and their impact.", category: "Karma Theory & Ethical Living" },
+            { text: "Understand the importance of *Punya* (merit) and *Papa* (demerit).", category: "Karma Theory & Ethical Living" },
+            { text: "Reflect on the true nature of *Dharma* as self-purification.", category: "Karma Theory & Ethical Living" },
+            { text: "Study the *Pancha Mahavratas* (five great vows) for ascetics.", category: "Karma Theory & Ethical Living" },
+            { text: "Understand the *Anuvratas* (minor vows) for householders.", category: "Karma Theory & Ethical Living" },
+            { text: "Reflect on the practice of *Ahimsa* (non-violence) in daily life.", category: "Karma Theory & Ethical Living" },
+            { text: "Study the nuances of *Satya* (truthfulness).", category: "Karma Theory & Ethical Living" },
+            { text: "Understand the importance of *Asteya* (non-stealing).", category: "Karma Theory & Ethical Living" },
+            { text: "Reflect on the practice of *Brahmacharya* (chastity).", category: "Karma Theory & Ethical Living" },
+            { text: "Study the principles of *Aparigraha* (non-possessiveness).", category: "Karma Theory & Ethical Living" },
+
+            // Month 10: Svadhyaya for Internal & External Tapas
+            { text: "Study the definition of *Tapas* (austerity).", category: "Internal & External Tapas" },
+            { text: "Understand *Anashana* (fasting) as external *Tapas*.", category: "Internal & External Tapas" },
+            { text: "Reflect on *Avamodarya* (eating less than hunger).", category: "Internal & External Tapas" },
+            { text: "Study *Vritti-parisankhyana* (limiting food items).", category: "Internal & External Tapas" },
+            { text: "Understand *Rasa-parityaga* (renouncing delicacies).", category: "Internal & External Tapas" },
+            { text: "Reflect on *Kaya-klesha* (endurance of bodily discomfort).", category: "Internal & External Tapas" },
+            { text: "Study *Pratisamlinata* (seclusion/withdrawal of senses).", category: "Internal & External Tapas" },
+            { text: "Understand *Prayashchitta* (expiation/repentance) as internal *Tapas*.", category: "Internal & External Tapas" },
+            { text: "Reflect on *Vinaya* (reverence) towards the virtuous.", category: "Internal & External Tapas" },
+            { text: "Study *Vaiyavritya* (service) to ascetics and the needy.", category: "Internal & External Tapas" },
+            { text: "Understand *Svadhyaya* (self-study) as internal *Tapas*.", category: "Internal & External Tapas" },
+            { text: "Reflect on *Dhyana* (meditation) as internal *Tapas*.", category: "Internal & External Tapas" },
+            { text: "Study *Vyutsarga* (abandonment of body/ego) as internal *Tapas*.", category: "Internal & External Tapas" },
+            { text: "Read about the benefits of *Tapas* in shedding karma.", category: "Internal & External Tapas" },
+            { text: "Contemplate how *Tapas* strengthens self-control.", category: "Internal & External Tapas" },
+            { text: "Reflect on the role of *Tapas* in purifying the soul.", category: "Internal & External Tapas" },
+            { text: "Study the importance of balanced *Tapas*.", category: "Internal & External Tapas" },
+            { text: "Understand how *Tapas* reduces *Mohniya Karma*.", category: "Internal & External Tapas" },
+            { text: "Reflect on the inner strength gained through austerity.", category: "Internal & External Tapas" },
+            { text: "Study the practice of *Samayika* (equanimity meditation).", category: "Internal & External Tapas" },
+            { text: "Understand the purpose of *Pratikramana* (repentance).", category: "Internal & External Tapas" },
+            { text: "Reflect on the benefits of daily introspection.", category: "Internal & External Tapas" },
+            { text: "Study the process of *Alocana* (confession).", category: "Internal & External Tapas" },
+            { text: "Understand the importance of seeking forgiveness.", category: "Internal & External Tapas" },
+            { text: "Reflect on the purity achieved through sincere repentance.", category: "Internal & External Tapas" },
+            { text: "Study the practice of *Kayotsarga* (meditation in standing posture).", category: "Internal & External Tapas" },
+            { text: "Understand the role of *Dhyana* in achieving self-realization.", category: "Internal & External Tapas" },
+            { text: "Reflect on the different types of *Dhyana*.", category: "Internal & External Tapas" },
+            { text: "Study *Dharma Dhyana* (righteous meditation).", category: "Internal & External Tapas" },
+            { text: "Understand *Shukla Dhyana* (pure meditation) for liberation.", category: "Internal & External Tapas" },
+            { text: "Reflect on the power of concentration (*Dharana*).", category: "Internal & External Tapas" },
+            // Month 11: Daily Ethical & Mindful Living through Svadhyaya
+            { text: "Study the importance of *Dana* (charity) and its types.", category: "Ethical & Mindful Living" },
+            { text: "Reflect on giving food, medicine, knowledge, and protection.", category: "Ethical & Mindful Living" },
+            { text: "Understand the concept of *Upavasa* (fasting) and its spiritual significance.", category: "Ethical & Mindful Living" },
+            { text: "Reflect on the benefits of *Ratri Bhojan Tyag* (avoiding night eating).", category: "Ethical & Mindful Living" },
+            { text: "Study the importance of filtering water (*Jal Gālana*).", category: "Ethical & Mindful Living" },
+            { text: "Understand the principle of *Jiva Daya* (compassion for all life).", category: "Ethical & Mindful Living" },
+            { text: "Reflect on being mindful of one's impact on the environment.", category: "Ethical & Mindful Living" },
+            { text: "Study the importance of *Samyak Charitra* (right conduct).", category: "Ethical & Mindful Living" },
+            { text: "Understand how *Samyak Charitra* leads to *Nirjara*.", category: "Ethical & Mindful Living" },
+            { text: "Reflect on the qualities of a true *Shravaka* (householder).", category: "Ethical & Mindful Living" },
+            { text: "Study the importance of *Guru-Upasna* (reverence for teachers).", category: "Ethical & Mindful Living" },
+            { text: "Understand the value of *Satsang* (association with the virtuous).", category: "Ethical & Mindful Living" },
+            { text: "Reflect on the power of positive spiritual company.", category: "Ethical & Mindful Living" },
+            { text: "Study the importance of avoiding *Pramada* (negligence).", category: "Ethical & Mindful Living" },
+            { text: "Understand how laziness obstructs spiritual progress.", category: "Ethical & Mindful Living" },
+            { text: "Reflect on the need for constant vigilance over thoughts.", category: "Ethical & Mindful Living" },
+            { text: "Study the importance of *Vairagya* (detachment) in daily life.", category: "Ethical & Mindful Living" },
+            { text: "Understand how detachment reduces suffering.", category: "Ethical & Mindful Living" },
+            { text: "Reflect on the impermanence of all worldly relationships.", category: "Ethical & Mindful Living" },
+            { text: "Study the importance of *Samata* (equanimity) towards all beings.", category: "Ethical & Mindful Living" },
+            { text: "Understand how equanimity reduces *kashayas*.", category: "Ethical & Mindful Living" },
+            { text: "Reflect on the peace that comes from inner balance.", category: "Ethical & Mindful Living" },
+            { text: "Study the importance of *Viveka* (discrimination) between soul and non-soul.", category: "Ethical & Mindful Living" },
+            { text: "Understand how *Viveka* strengthens *Samyak Darshan*.", category: "Ethical & Mindful Living" },
+            { text: "Reflect on the clarity gained through right discrimination.", category: "Ethical & Mindful Living" },
+            { text: "Study the importance of *Purushartha* (self-effort).", category: "Ethical & Mindful Living" },
+            { text: "Understand that liberation is achieved through one's own efforts.", category: "Ethical & Mindful Living" },
+            { text: "Reflect on the power of individual spiritual striving.", category: "Ethical & Mindful Living" },
+
+            // Month 12: Culmination & Sustained Practice
+            { text: "Review the seven *tattvas* and their interrelation.", category: "Culmination & Sustained Practice" },
+            { text: "Reflect on the essence of *Ahimsa* in thought, word, and deed.", category: "Culmination & Sustained Practice" },
+            { text: "Study the path to *Moksha* as a continuous journey.", category: "Culmination & Sustained Practice" },
+            { text: "Understand the importance of perseverance in spiritual practice.", category: "Culmination & Sustained Practice" },
+            { text: "Reflect on the progress made in controlling *kashayas*.", category: "Culmination & Sustained Practice" },
+            { text: "Study how *Svadhyaya* has reduced *Jnanavaraniya Karma*.", category: "Culmination & Sustained Practice" },
+            { text: "Understand how *Svadhyaya* has weakened *Mohniya Karma*.", category: "Culmination & Sustained Practice" },
+            { text: "Reflect on the deeper understanding gained about the soul.", category: "Culmination & Sustained Practice" },
+            { text: "Study the qualities of a *Jivanmukta* (liberated while living).", category: "Culmination & Sustained Practice" },
+            { text: "Understand the ultimate goal of becoming a *Siddha*.", category: "Culmination & Sustained Practice" },
+            { text: "Reflect on the infinite bliss of liberation.", category: "Culmination & Sustained Practice" },
+            { text: "Resolve to continue *Svadhyaya* diligently every day.", category: "Culmination & Sustained Practice" },
+            { text: "Reaffirm commitment to the *Ratnatraya* (Right Belief, Knowledge, Conduct).", category: "Culmination & Sustained Practice" },
+            { text: "Contemplate the pure, eternal, and blissful nature of the liberated soul.", category: "Culmination & Sustained Practice" },
+            // Niyam 365 (Last one)
+            { text: "Strive for ultimate liberation (*Moksha*) with unwavering resolve.", category: "Culmination & Sustained Practice" }
+        ];
+        
+        function getDayOfYear() {
+            const now = new Date();
+            const start = new Date(now.getFullYear(), 0, 0);
+            const diff = (now - start) + ((start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000);
+            const oneDay = 1000 * 60 * 60 * 24;
+            return Math.floor(diff / oneDay);
+        }
+
+        function displayDailyNiyam() {
+            const dayOfYear = getDayOfYear();
+            const niyamIndex = (dayOfYear - 1) % niyams.length; // -1 for 0-based index, % for cycling
+            const todayNiyam = niyams[niyamIndex];
+
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('niyam-date').textContent = new Date().toLocaleDateString(undefined, options);
+            document.getElementById('niyam-text').innerHTML = todayNiyam.text; // Use innerHTML for italics
+            document.getElementById('niyam-category').textContent = `Category: ${todayNiyam.category}`;
+        }
+
+        // Call the function when the page loads
+        document.addEventListener('DOMContentLoaded', displayDailyNiyam);
+    </script>
+</body>
+</html>
