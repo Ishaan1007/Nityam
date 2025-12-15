@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Daily Practices</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Calm Devanagari Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f7f5f1;
+      --card: #fffdf8;
+      --text: #1f1f1f;
+      --muted: #7a7a7a;
+      --border: #e6e1d8;
+      --accent: #b58b4a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      font-family: "Noto Serif Devanagari", serif;
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      padding: 24px 14px;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 26px;
+    }
+
+    .header h1 {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 0 0 6px;
+    }
+
+    .header p {
+      font-size: 14px;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 20px;
+      padding: 22px 18px;
+      border: 1px solid var(--border);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+      margin-bottom: 18px;
+      text-align: center;
+    }
+
+    .card h2 {
+      font-size: 20px;
+      font-weight: 500;
+      margin: 0 0 10px;
+      color: #444;
+    }
+
+    .card p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 26px;
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: #444;
+      font-size: 15px;
+    }
+
+    .btn:hover {
+      background: rgba(181,139,74,0.08);
+      border-color: var(--accent);
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+
+    <!-- HEADER -->
+    <div class="header">
+      <h1>दैनिक साधना</h1>
+      <p>नियम · स्वाध्याय · व्यायाम</p>
+    </div>
+
+    <!-- 🔹 NIYAM SECTION -->
+    <!-- Copy this section into niyam.html if needed -->
+    <div class="card">
+      <h2>नियम</h2>
+      <p>
+        दैनिक जीवन के लिए संकल्प,
+        संयम और सजगता का अभ्यास।
+      </p>
+      <a class="btn" href="niyam.html">प्रवेश करें</a>
+    </div>
+
+    <!-- 🔹 SVADHYAY SECTION -->
+    <!-- Copy this section into svadhyay.html if needed -->
+    <div class="card">
+      <h2>स्वाध्याय</h2>
+      <p>
+        आत्म-अवलोकन, चिंतन
+        और अध्ययन की साधना।
+      </p>
+      <a class="btn" href="svadhyay.html">प्रवेश करें</a>
+    </div>
+
+    <!-- 🔹 VYAYAM SECTION -->
+    <!-- Copy this section into vyayam.html if needed -->
+    <div class="card">
+      <h2>व्यायाम</h2>
+      <p>
+        शरीर को स्थिर, सशक्त
+        और सजग रखने का अभ्यास।
+      </p>
+      <a class="btn" href="vyayam.html">प्रवेश करें</a>
+    </div>
+
+    <div class="footer">
+      संतुलन — शरीर · मन · विचार
+    </div>
+
+  </div>
+</body>
+</html>
