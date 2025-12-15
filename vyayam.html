@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Vyayam – Morning Routine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f7f5f1;
+      --card: #fffdf8;
+      --text: #1f1f1f;
+      --muted: #7a7a7a;
+      --border: #e6e1d8;
+      --accent: #b58b4a;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      font-family: "Libre Baskerville", serif;
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      padding: 24px 14px;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .date {
+      text-align: center;
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 20px;
+      padding: 22px 18px;
+      border: 1px solid var(--border);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+      margin-bottom: 22px;
+    }
+
+    h2 {
+      text-align: center;
+      font-weight: 400;
+      font-size: 18px;
+      margin-bottom: 16px;
+      color: #444;
+    }
+
+    .exercise {
+      text-align: center;
+      font-size: 17px;
+      margin-bottom: 14px;
+    }
+
+    .time {
+      display: block;
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* TIMER */
+    .timer {
+      text-align: center;
+      font-size: 36px;
+      font-weight: 600;
+      margin: 10px 0;
+      color: var(--accent);
+    }
+
+    .timer-btns {
+      display: flex;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 12px 0;
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      background: transparent;
+      font-family: inherit;
+      font-size: 15px;
+      cursor: pointer;
+      color: #444;
+    }
+
+    .btn:hover {
+      background: rgba(181,139,74,0.08);
+      border-color: var(--accent);
+    }
+
+    .reflection {
+      text-align: center;
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 10px;
+    }
+
+    .note-title {
+      text-align: center;
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .note-text {
+      text-align: center;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+
+    <div class="date">Today — Monday, 15 December</div>
+
+    <!-- ROUTINE -->
+    <div class="card">
+      <h2>Today’s Vyayam</h2>
+
+      <div class="exercise">
+        Cat–Cow Spine Flow
+        <span class="time">1 minute</span>
+      </div>
+
+      <div class="exercise">
+        Standing Side Stretch
+        <span class="time">30 sec each side</span>
+      </div>
+
+      <div class="exercise">
+        Glute Bridge
+        <span class="time">15 slow reps</span>
+      </div>
+
+      <div class="exercise">
+        Bird Dog
+        <span class="time">10 controlled reps</span>
+      </div>
+
+      <div class="exercise">
+        Cobra Stretch
+        <span class="time">2 × 20 sec</span>
+      </div>
+    </div>
+
+    <!-- TIMER -->
+    <div class="card">
+      <h2>10-Minute Timer</h2>
+
+      <div id="timer" class="timer">10:00</div>
+
+      <div class="timer-btns">
+        <button class="btn" onclick="startTimer()">Start</button>
+        <button class="btn" onclick="pauseTimer()">Pause</button>
+        <button class="btn" onclick="resetTimer()">Reset</button>
+      </div>
+
+      <div class="reflection">
+        Begin slowly. Let the body guide the pace.
+      </div>
+    </div>
+
+    <!-- PRINCIPLE -->
+    <div class="card">
+      <div class="note-title">Daily Body Principle</div>
+      <div class="note-text">
+        Exercise is not a race.
+        It is a practice of steadiness,
+        awareness, and respect for the body.
+      </div>
+    </div>
+
+    <div class="footer">
+      Direction — Strength · Balance · Discipline
+    </div>
+
+  </div>
+
+<script>
+  let totalTime = 600; // 10 minutes in seconds
+  let timerInterval = null;
+
+  function updateDisplay() {
+    const minutes = String(Math.floor(totalTime / 60)).padStart(2, '0');
+    const seconds = String(totalTime % 60).padStart(2, '0');
+    document.getElementById("timer").textContent = `${minutes}:${seconds}`;
+  }
+
+  function startTimer() {
+    if (timerInterval) return;
+    timerInterval = setInterval(() => {
+      if (totalTime > 0) {
+        totalTime--;
+        updateDisplay();
+      } else {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        document.getElementById("timer").textContent = "Done";
+      }
+    }, 1000);
+  }
+
+  function pauseTimer() {
+    clearInterval(timerInterval);
+    timerInterval = null;
+  }
+
+  function resetTimer() {
+    pauseTimer();
+    totalTime = 600;
+    updateDisplay();
+  }
+
+  updateDisplay();
+</script>
+
+</body>
+</html>
