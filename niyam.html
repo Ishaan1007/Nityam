@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <title>नियम</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f7f5f1;
+      --paper: #fffdf8;
+      --text: #1f1f1f;
+      --muted: #777;
+      --accent: #b58b4a;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Noto Serif Devanagari", serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+    }
+
+    .mandala-bg {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: 520px;
+      height: 520px;
+      transform: translate(-50%, -50%);
+      stroke: rgba(181,139,74,0.08);
+      fill: none;
+      stroke-width: 1;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .app {
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .date {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .niyam-box {
+      background: var(--paper);
+      padding: 34px 26px;
+      border-radius: 14px;
+      border: 1px solid rgba(0,0,0,0.05);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+      margin-bottom: 30px;
+      animation: fadeIn 1.2s ease forwards;
+    }
+
+    .title {
+      font-size: 16px;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .niyam-text {
+      font-size: 21px;
+      line-height: 1.65;
+      text-align: left;
+    }
+
+    .actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    .btn {
+      padding: 10px 26px;
+      border-radius: 999px;
+      border: 1px solid var(--muted);
+      background: transparent;
+      font-family: inherit;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .btn.selected {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(181,139,74,0.2);
+    }
+
+    .note-toggle {
+      font-size: 14px;
+      color: var(--muted);
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+
+    .note { display: none; }
+
+    .note input {
+      width: 100%;
+      padding: 10px;
+      font-family: inherit;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    .mulya-box {
+      margin-top: 28px;
+      padding: 18px;
+      background: rgba(181,139,74,0.08);
+      border-radius: 12px;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .mulya-title {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .kshaya {
+      margin-top: 18px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+
+<body>
+
+<svg class="mandala-bg" viewBox="0 0 500 500">
+  <circle cx="250" cy="250" r="220"/>
+  <circle cx="250" cy="250" r="180"/>
+  <circle cx="250" cy="250" r="140"/>
+  <circle cx="250" cy="250" r="100"/>
+  <circle cx="250" cy="250" r="60"/>
+</svg>
+
+<div class="app">
+  <div class="date" id="date"></div>
+
+  <div class="niyam-box">
+    <div class="title">आज के नियम</div>
+    <div class="niyam-text" id="niyamText"></div>
+  </div>
+
+  <div class="actions">
+    <button class="btn" id="awareBtn">सजग रहा</button>
+    <button class="btn" id="unawareBtn">असजग रहा</button>
+  </div>
+
+  <div class="note-toggle" id="noteToggle">एक पंक्ति लिखें (वैकल्पिक)</div>
+  <div class="note" id="noteBox">
+    <input type="text" maxlength="80">
+  </div>
+
+  <div class="mulya-box">
+    <div class="mulya-title">दैनिक मूल्य नियम</div>
+    <b>
+      प्रत्येक दिन कार्य, वाणी और मन —  
+      तीनों में प्रमाद से बचते हुए  
+      कर्तव्य को प्रथम रखें।
+    </b>
+  </div>
+
+  <div class="kshaya">क्षय दिशा — चरित्र मोहनीय कर्म</div>
+</div>
+
+<script>
+const niyams = [
+  "• राग की उत्पत्ति पर दृष्टि रखते हुए विरति रखें।",
+  "• द्वेष की प्रवृत्ति को पहचानते हुए संयम रखें।",
+  "• अनुकूल-प्रतिकूल में समभाव रखें।",
+  "• प्रमादजन्य ढिलाई से दूरी रखें।",
+  "• अनावश्यक वचन से संयम रखें।",
+  "• एक कार्य में स्थिरता रखें।",
+
+  "• इन्द्रिय विषयों में मर्यादा रखें।",
+  "• चित्त की चंचलता को शांत दृष्टि से देखें।",
+  "• स्मृति से उठते असंयम भाव को रोकें।",
+  "• आलस्य की पहचान करते हुए सज्ञान रखें।",
+  "• भोग प्रवृत्ति से दूरी रखें।",
+  "• मन की तीव्रता को धीमा रखें।",
+
+  "• राग-द्वेष की हलचल को देखते हुए विरति रखें।",
+  "• वाणी में अनावश्यक विस्तार से बचें।",
+  "• कार्य करते समय प्रमाद न आने दें।",
+  "• इन्द्रिय सुख में सीमित दृष्टि रखें।",
+  "• अनिच्छा में भी समता रखें।",
+  "• चित्त को एकाग्र दिशा दें।",
+
+  "• पूर्व आदतों की पकड़ को ढीला रखें।",
+  "• भीतर उठती तुलना से दूरी रखें।",
+  "• सुख-दुःख में भेदभाव न बढ़ाएँ।",
+  "• अवसर पाकर प्रमाद न आने दें।",
+  "• वचन से पहले भाव को देखें।",
+  "• इन्द्रिय आग्रह को पहचानें।",
+
+  "• मन की चपलता में न बहें।",
+  "• अनुकूलता में राग न बढ़ाएँ।",
+  "• प्रतिकूलता में द्वेष न बढ़ाएँ।",
+  "• कार्य में टालमटोल न रखें।",
+  "• अनावश्यक प्रतिक्रिया से विरति रखें।",
+  "• आंतरिक शांति को प्रधान रखें।",
+
+  "• मन में उठते आग्रह को तुरंत न मानें।",
+  "• कार्य से पहले सुविधा न खोजें।",
+  "• वाणी के आवेग को शांत रखें।",
+  "• असमर्थता की भावना में न बहें।",
+  "• कर्तव्य करते समय तुलना न करें।",
+  "• अंतर में उठती बेचैनी को देखें।",
+
+  "• कार्य के प्रति उदासीनता को पहचानें।",
+  "• मन को त्वरित संतोष से रोकें।",
+  "• अनुशासन को बोझ न मानें।",
+  "• कर्तव्य से पहले मनुहार न करें।",
+  "• स्वभावजन्य ढिलाई को देखें।",
+  "• वाणी में कटुता से बचें।",
+
+  "• कार्य करते समय पलायन न करें।",
+  "• मन की जल्दबाज़ी को थामें।",
+  "• असहजता में भी स्थिर रहें।",
+  "• अनावश्यक सोच को विराम दें।",
+  "• कर्तव्य में रुचि का अभ्यास करें।",
+  "• मन को बार-बार कार्य में लौटाएँ।",
+
+  "• परिणाम की कल्पना से दूरी रखें।",
+  "• कर्तव्य को टालने वाले विचार न मानें।",
+  "• मन की शिकायत प्रवृत्ति को देखें।",
+  "• स्वयं से कठोर वचन न बोलें।",
+  "• कार्य में पूर्णता का आग्रह न बढ़ाएँ।",
+  "• कर्तव्य को बोझ की तरह न देखें।",
+
+  "• वर्तमान क्षण में टिकने का अभ्यास करें।",
+  "• मन को बाहरी उत्तेजना से बचाएँ।",
+  "• अनावश्यक व्यस्तता से दूरी रखें।",
+  "• कर्तव्य के समय मौन को प्राथमिकता दें।",
+  "• मन में उठती थकान को पहचानें।",
+  "• कर्तव्य से जुड़ी अरुचि को देखें।",
+
+  "• अनुशासन टूटने पर स्वयं को देखें।",
+  "• कार्य करते समय आत्म-संवाद सीमित रखें।",
+  "• मन की भटकन को तुरंत पहचानें।",
+  "• कर्तव्य में नियमितता को प्रधान रखें।"
+];
+
+const today = new Date();
+const dayCount = Math.floor(today.getTime() / (1000 * 60 * 60 * 24));
+const pairIndex = (dayCount * 2) % niyams.length;
+
+document.getElementById("niyamText").innerHTML =
+  niyams[pairIndex] + "<br><br>" + niyams[pairIndex + 1];
+
+document.getElementById("date").innerText =
+  "आज — " + today.toLocaleDateString("hi-IN", {
+    weekday: "long",
+    day: "numeric",
+    month: "long"
+  });
+
+const awareBtn = document.getElementById("awareBtn");
+const unawareBtn = document.getElementById("unawareBtn");
+
+awareBtn.onclick = () => {
+  awareBtn.classList.add("selected");
+  unawareBtn.classList.remove("selected");
+};
+unawareBtn.onclick = () => {
+  unawareBtn.classList.add("selected");
+  awareBtn.classList.remove("selected");
+};
+
+document.getElementById("noteToggle").onclick = () => {
+  const note = document.getElementById("noteBox");
+  note.style.display = note.style.display === "block" ? "none" : "block";
+};
+</script>
+
+</body>
+</html>
